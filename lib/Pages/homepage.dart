@@ -6,6 +6,7 @@ import 'package:my_flutterapp/controllers/homePageCardData.dart';
 import 'package:my_flutterapp/controllers/videoplayer.dart';
 import 'package:my_flutterapp/controllers/cardViewScroll.dart';
 import 'package:my_flutterapp/controllers/smallcardview.dart';
+
 class homepage extends StatefulWidget {
   const homepage({super.key});
 
@@ -140,7 +141,27 @@ class _homepageState extends State<homepage> {
             
           ),
           20.heightBox,
-          
+          Container(
+  width: double.infinity,
+  padding: EdgeInsets.all(16),
+  child:ElevatedButton(
+
+
+style: ElevatedButton.styleFrom(
+            backgroundColor:Color.fromARGB(255, 207, 184, 34),
+          ),
+
+  
+    onPressed: () {},
+    child: Text(
+      "Yellow Button",
+      style: TextStyle(color: Colors.black,),
+
+
+    ),
+    
+  ),
+)
           
                 ],
                 
