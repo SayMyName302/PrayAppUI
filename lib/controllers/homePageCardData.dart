@@ -87,7 +87,7 @@ Widget cardView({width, height, image}) {
             ),
           ),
         ],
-      ).box.rounded.hexColor("#474747").size(width, height).make(),
+      ).box.rounded.hexColor("#474747").size(width, height).margin(const EdgeInsets.symmetric(horizontal: 15)).make(),
     ),
   );
 }

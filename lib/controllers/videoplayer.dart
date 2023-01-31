@@ -42,12 +42,13 @@ VideoPlayerController?_videoPlayerController;
   }
   @override
   Widget build(BuildContext context) {
-    return _chewieVideoPlayer();
+    return  _chewieVideoPlayer();
+    
   }
   Widget _chewieVideoPlayer(){
     return _chewieController!=null && _videoPlayerController!=null?
     ClipRRect(
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(15),
       child: Chewie(controller: _chewieController!,),
     ): const Text('Loading!');
   }

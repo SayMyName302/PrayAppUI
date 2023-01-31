@@ -11,7 +11,7 @@ Widget smallScroll({
     child: Image.asset(image, width: 140, height: 80, fit: BoxFit.fill),
   )
       .box
-      .margin(EdgeInsets.symmetric(horizontal: 4))
-      .padding(const EdgeInsets.all(2))
+      .margin(EdgeInsets.only(left: 15))
+      
       .make();
 }

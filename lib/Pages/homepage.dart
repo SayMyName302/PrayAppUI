@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:my_flutterapp/consts/const.dart';
+import 'package:my_flutterapp/controllers/horizontalScrollmenu.dart';
 import "package:velocity_x/velocity_x.dart";
 import 'package:my_flutterapp/controllers/homePageCardData.dart';
 import 'package:my_flutterapp/controllers/videoplayer.dart';
 import 'package:my_flutterapp/controllers/cardViewScroll.dart';
 import 'package:my_flutterapp/controllers/smallcardview.dart';
+
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -15,6 +17,24 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
+  int selectedIndex = 0;
+  final List<String> menuItems = ["All", "Favorites", "Sleep", "Bible", "Plans","Old Testament", "Podcasts"];
+   ScrollController _scrollController = ScrollController();
+   @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      setState(() {
+        selectedIndex = (_scrollController.offset / 150).floor();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,108 +55,128 @@ class _homepageState extends State<homepage> {
           ),
             
           body: SingleChildScrollView(
-            child: Container(
-              
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                children: [
-                  SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                SingleChildScrollView(
+                  controller: _scrollController,
+                        physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: List.generate(
-                            5,
-                            (index) => "Menu Items"
-                                .text
-                                .color(Colors.white)
-                                .makeCentered()
-                                .box.hexColor("#454242")
-                                .rounded
-                                .size(150, 32).shadowSm
-                                .margin(EdgeInsets.symmetric(horizontal: 4))
-                                .make()),
+                            7,
+                            (index) =>GestureDetector(
+                                   onTap: () {
+                                    _scrollController.animateTo(
+                          index * 100.0,
+                          
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeOut,
+                        );
+                        setState(() {
+                          selectedIndex = index;
+                        });
+                      },
+                      child:  menuItems[index].text.color(
+                            selectedIndex == index ? Colors.black : Colors.white,
+                          ) .makeCentered()
+                          .box.hexColor(selectedIndex==index?"#FFFFFF":"#474747")
+                          .rounded
+                          .size(150, 32)
+                          .shadowSm
+                          .margin(EdgeInsets.symmetric(horizontal: 4))
+                          .make(),
+                            ) 
+                        
                                 
-                      )
-                      ),
-                        20.heightBox,
-                        Row(children: List.generate(1, (index) => cardView(
+                        )
+                        )
+
+              
+                    ),
+                       
+         
+                      20.heightBox,
+                      Row(children: List.generate(1, (index) => cardView(
           height:context.screenHeight*0.146,
           width:context.screenWidth/2.5,
           
-                        )),
-                        ),
-                        20.heightBox,
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: prayTv.text.bold.size(18).make()
-                          ,
-                         
-                          
-                          ),
-                          
-          
+                      )),
+                      ),
+
+
+
+                      
+                      20.heightBox,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: prayTv.text.bold.size(18).make()
+                        ,
+                       
+                        
+                        ).box.margin(const EdgeInsets.symmetric(horizontal: 15)).make(),
+                        
+          20.heightBox,
            SizedBox(
-              height:context.screenHeight*0.3,
-          width:context.screenWidth/0.3,
-              child: VideoPlayer(),
-              
-            )
+           
+            child: VideoPlayer(),
+            
+            ).box.size(350, 200).roundedSM.make()
             ,
              20.heightBox,
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: newreleases.text.bold.size(18).make()
-                          ,
-                         
-                          
-                          ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: newreleases.text.bold.size(18).make()
+                        ,
+                       
+                        
+                        ).box.margin(const EdgeInsets.symmetric(horizontal: 15)).make(),
             20.heightBox,
           SingleChildScrollView(
         
             scrollDirection: Axis.horizontal,
             child: Row(
-                  
-              children: List.generate(7, (index) => Column(
-                children: [
-                  
+                
+            children: List.generate(7, (index) => Column(
+              children: [
+                
             HorizontalScroll(image: listImages[index],),
             
+            
+              ],
               
-                ],
-                
-              )
-              
-              ),
-              
+            )
+            
+            ),
+            
             ),
             
           ),
           20.heightBox,
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: previews.text.bold.size(18).make()
-                          ,
-                         
-                          
-                          ),
-                          20.heightBox,
-                          SingleChildScrollView(
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: previews.text.bold.size(18).make()
+                        ,
+                       
+                        
+                        ).box.margin(const EdgeInsets.symmetric(horizontal: 15)).make(),
+                        20.heightBox,
+                        SingleChildScrollView(
         
             scrollDirection: Axis.horizontal,
             child: Row(
-                  
-              children: List.generate(7, (index) => Column(
-                children: [
-                  
+                
+            children: List.generate(7, (index) => Column(
+              children: [
+                
             smallScroll(image: listImages[index],),
             
+            
+              ],
               
-                ],
-                
-              )
-              
-              ),
-              
+            )
+            
+            ),
+            
             ),
             
           ),
@@ -154,7 +194,7 @@ style: ElevatedButton.styleFrom(
   
     onPressed: () {},
     child: Text(
-      "Yellow Button",
+      "Unlock Pray Premium",
       style: TextStyle(color: Colors.black,),
 
 
@@ -163,11 +203,7 @@ style: ElevatedButton.styleFrom(
   ),
 )
           
-                ],
-                
-                
-              ),
-              
+              ],
               
               
             ),

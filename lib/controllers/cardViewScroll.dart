@@ -11,7 +11,7 @@ Widget HorizontalScroll({
     child: Image.asset(image, width: 360, height: 200, fit: BoxFit.fill),
   )
       .box
-      .margin(EdgeInsets.symmetric(horizontal: 4))
+      .margin(EdgeInsets.symmetric(horizontal: 15))
       .padding(const EdgeInsets.all(2))
       .make();
 }
