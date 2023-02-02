@@ -7,7 +7,9 @@ import 'package:my_flutterapp/controllers/homePageCardData.dart';
 import 'package:my_flutterapp/controllers/videoplayer.dart';
 import 'package:my_flutterapp/controllers/cardViewScroll.dart';
 import 'package:my_flutterapp/controllers/smallcardview.dart';
-
+import  'package:my_flutterapp/Pages/Player.dart';
+import 'package:my_flutterapp/Pages/prayPage.dart';
+import 'package:my_flutterapp/Pages/readPage.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -83,14 +85,14 @@ class _homepageState extends State<homepage> {
                           .rounded
                           .size(150, 32)
                           .shadowSm
-                          .margin(EdgeInsets.symmetric(horizontal: 4))
+                          .margin(const EdgeInsets.symmetric(horizontal: 4))
                           .make(),
                             ) 
                         
                                 
                         )
                         )
-
+    
               
                     ),
                        
@@ -102,9 +104,9 @@ class _homepageState extends State<homepage> {
           
                       )),
                       ),
-
-
-
+    
+    
+    
                       
                       20.heightBox,
                       Align(
@@ -116,7 +118,7 @@ class _homepageState extends State<homepage> {
                         ).box.margin(const EdgeInsets.symmetric(horizontal: 15)).make(),
                         
           20.heightBox,
-           SizedBox(
+           const SizedBox(
            
             child: VideoPlayer(),
             
@@ -182,26 +184,26 @@ class _homepageState extends State<homepage> {
           ),
           20.heightBox,
           Container(
-  width: double.infinity,
-  padding: EdgeInsets.all(16),
-  child:ElevatedButton(
-
-
-style: ElevatedButton.styleFrom(
-            backgroundColor:Color.fromARGB(255, 207, 184, 34),
+    width: double.infinity,
+    padding: const EdgeInsets.all(16),
+    child:ElevatedButton(
+    
+    
+    style: ElevatedButton.styleFrom(
+            backgroundColor:const Color.fromARGB(255, 207, 184, 34),
           ),
-
-  
+    
+    
     onPressed: () {},
-    child: Text(
+    child: const Text(
       "Unlock Pray Premium",
       style: TextStyle(color: Colors.black,),
-
-
+    
+    
     ),
     
-  ),
-)
+    ),
+    )
           
               ],
               
@@ -212,37 +214,57 @@ style: ElevatedButton.styleFrom(
         
     
           bottomNavigationBar: Container(
-            color: Colors.black,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-              child: GNav(
-                backgroundColor: Colors.black,
-                color: Colors.white,
-                activeColor: Colors.white,
-                tabBackgroundColor: Colors.grey.shade800,
-                gap: 8,
-                padding: EdgeInsets.all(16),
-                tabs: const [
-                  GButton(
-                    icon: Icons.home,
-                    text: home,
-                  ),
-                  GButton(
-                    icon: Icons.search,
-                    text: search,
-                  ),
-                  GButton(
-                    icon: Icons.read_more,
-                    text: read,
-                  ),
-                  GButton(
-                    icon: Icons.favorite,
-                    text: pray,
-                  ),
-                ],
-              ),
-            ),
-          ),
+    color: Colors.black,
+    child: Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+    child: GNav(
+      backgroundColor: Colors.black,
+      color: Colors.white,
+      activeColor: Colors.white,
+      tabBackgroundColor: Colors.grey.shade800,
+      gap: 8,
+      padding: EdgeInsets.all(16),
+      tabs: [
+        GButton(
+          icon: Icons.home,
+          text: home,
+      
+        ),
+        GButton(
+          icon: Icons.search,
+          text: search,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => sleepPage()),
+            );
+          },
+        ),
+        GButton(
+          icon: Icons.read_more,
+          text: read,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => readPage()),
+            );
+          },
+        ),
+        GButton(
+          icon: Icons.favorite,
+          text: pray,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => prayPage()),
+            );
+          },
+        ),
+      ],
+    ),
+    ),
+    ),
+    
         ),
       ),
       ]
